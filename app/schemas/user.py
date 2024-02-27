@@ -11,8 +11,8 @@ class UserSchema(AuditBaseModel):
     uuid: UUID = Field(default=generate_uuid())
     email: str
     password: str
-    avatar: str | None
-    full_name: str | None
-    dob: date | None
+    avatar: str | None = None
+    full_name: str | None = None
+    dob: date | None = None
     is_member: bool = False
     is_staff: bool = False
