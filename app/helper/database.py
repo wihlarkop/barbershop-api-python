@@ -17,8 +17,8 @@ class DatabaseClient:
             pool_timeout=settings.POOL_TIMEOUT,
             pool_size=settings.POOL_SIZE,
             max_overflow=settings.MAX_OVERFLOW,
-            echo=True,
-            echo_pool=True
+            # echo=True,
+            # echo_pool=True
         )
 
     def get_meta_data(self) -> MetaData:

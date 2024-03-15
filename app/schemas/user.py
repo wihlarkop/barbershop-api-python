@@ -8,7 +8,7 @@ from app.schemas.base import AuditBaseModel
 
 
 class UserSchema(AuditBaseModel):
-    uuid: UUID = Field(default=generate_uuid())
+    uuid: UUID
     email: str
     password: str
     avatar: str | None = None

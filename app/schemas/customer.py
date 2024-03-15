@@ -1,17 +1,21 @@
-from typing import Any
+from pydantic import BaseModel, model_validator, SecretStr, EmailStr
 
-from pydantic import BaseModel, model_validator, SecretStr
-
+from app.helper.generator import generate_uuid
 from app.schemas.user import UserSchema
 
 
 class RegisterCustomer(BaseModel):
-    email: str
+    email: EmailStr
     password: SecretStr
 
-    @model_validator(mode='after')
-    def transform(self) -> UserSchema:
+    def transform(self, hash_password: str) -> UserSchema:
         return UserSchema(
+            uuid=generate_uuid(),
             email=self.email,
-            password=self.password.get_secret_value()
+            password=hash_password
         )
+
+
+class LoginCustomer(BaseModel):
+    email: EmailStr
+    password: SecretStr
