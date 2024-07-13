@@ -13,10 +13,6 @@ class DatabaseClient:
         return create_async_engine(
             url=self.connection_url,
             pool_pre_ping=True,
-            pool_recycle=settings.POOL_RECYCLE,
-            pool_timeout=settings.POOL_TIMEOUT,
-            pool_size=settings.POOL_SIZE,
-            max_overflow=settings.MAX_OVERFLOW,
             # echo=True,
             # echo_pool=True
         )
