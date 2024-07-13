@@ -9,7 +9,7 @@
   - [ ] Change password user
   - [ ] Delete user
   - [ ] Activate membership
-  - [ ] Register
+  - [x] Register
   - [ ] Login
 - **Transaction**
   - [ ] List transaction
@@ -23,12 +23,12 @@
 
 ### CMS/Admin
 - **User**
-  - [ ] Manage user
+  - [ ] Manage CRUD user
 - **Transaction**
-  - [ ] Manage transaction
+  - [ ] Manage CRUD transaction
 - **Products**
-  - [ ] Manage product
+  - [ ] Manage CRUD product
 - **Store**
-  - [ ] Manage store
+  - [ ] Manage CRUD store
 - **Barber**
-  - [ ] Manage barber
+  - [ ] Manage CRUD barber
