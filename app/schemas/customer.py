@@ -1,4 +1,4 @@
-from pydantic import BaseModel, model_validator, SecretStr, EmailStr
+from pydantic import BaseModel, SecretStr, EmailStr
 
 from app.helper.generator import generate_uuid
 from app.schemas.user import UserSchema
