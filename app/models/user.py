@@ -2,7 +2,7 @@ from datetime import datetime
 
 from sqlalchemy import Boolean, Date, String, Table, Column, Text, TIMESTAMP, UUID
 
-from app.helper.database import metadata
+from app.database.client import metadata
 from app.helper.generator import timezone
 
 user = Table(

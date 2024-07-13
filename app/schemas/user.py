@@ -1,9 +1,6 @@
 from datetime import date
 from uuid import UUID
 
-from pydantic import Field
-
-from app.helper.generator import generate_uuid
 from app.schemas.base import AuditBaseModel
 
 

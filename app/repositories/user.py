@@ -1,30 +1,31 @@
 from fastapi import HTTPException, status
 from sqlalchemy import insert, select
-from sqlalchemy.ext.asyncio import AsyncSession
+from sqlalchemy.ext.asyncio import AsyncConnection
 from sqlalchemy.sql.operators import eq
 
+from app.dependency.exception import InternalServerError
 from app.models.user import user
 from app.schemas.user import UserSchema
 
 
 class UserRepositories:
 
-    async def create_user(self, payload: UserSchema, session: AsyncSession):
+    async def create_user(self, payload: UserSchema, conn: AsyncConnection):
         stmt = insert(user).values(**payload.model_dump(exclude_unset=True))
 
         try:
-            await session.execute(statement=stmt)
-            await session.commit()
+            await conn.execute(statement=stmt)
+            await conn.commit()
         except Exception as e:
-            await session.rollback()
-            raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail=str(e))
+            await conn.rollback()
+            raise InternalServerError()
 
-    async def get_user(self, email: str, session: AsyncSession):
+    async def get_user(self, email: str, conn: AsyncConnection):
         stmt = select(user).where(eq(user.c.email, email))
 
         try:
-            result = await session.execute(statement=stmt)
+            result = await conn.execute(statement=stmt)
             return result.fetchone()
         except Exception as e:
-            await session.rollback()
-            raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="failed to get data")
+            await conn.rollback()
+            raise InternalServerError()
