@@ -21,10 +21,5 @@ class Settings(BaseSettings):
     POSTGRES_PORT: str
     POSTGRES_DB: str
 
-    POOL_RECYCLE: int
-    POOL_TIMEOUT: int
-    POOL_SIZE: int
-    MAX_OVERFLOW: int
-
 
 settings = Settings()
