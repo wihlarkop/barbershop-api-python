@@ -1,26 +1,30 @@
 from contextlib import asynccontextmanager
 
 import uvicorn
-from fastapi import FastAPI, HTTPException
-from fastapi.exceptions import RequestValidationError
+from fastapi import FastAPI, status
 
 from app.config import settings
 from app.controller.customer import customer_router
 from app.controller.health import health_router
-from app.dependency.exception import handle_custom_http_exception, handle_custom_validation_error
+from app.dependency.exception import create_exception_handler, InternalServerError
 from app.helper.database import engine
+from app.repositories.product import ProductRepositories
 from app.repositories.user import UserRepositories
 from app.services.customer import CustomerServices
+from app.services.product import ProductServices
 
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     user_repo = UserRepositories()
+    product_repo = ProductRepositories()
 
     customer_services = CustomerServices(user_repo=user_repo)
+    product_services = ProductServices(product_repo=product_repo)
 
     yield {
-        "customer_services": customer_services
+        "customer_services": customer_services,
+        "product_services": product_services
     }
     await engine.dispose()
 
@@ -32,8 +36,10 @@ app = FastAPI(
 )
 
 # for add new custom exception handler
-app.add_exception_handler(exc_class_or_status_code=HTTPException, handler=handle_custom_http_exception)
-app.add_exception_handler(exc_class_or_status_code=RequestValidationError, handler=handle_custom_validation_error)
+app.add_exception_handler(
+    exc_class_or_status_code=InternalServerError,
+    handler=create_exception_handler(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, message="something went wrong")
+)
 
 app.include_router(health_router)
 app.include_router(customer_router)
