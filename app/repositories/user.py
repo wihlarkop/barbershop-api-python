@@ -1,4 +1,3 @@
-from fastapi import HTTPException, status
 from sqlalchemy import insert, select
 from sqlalchemy.ext.asyncio import AsyncConnection
 from sqlalchemy.sql.operators import eq
@@ -17,8 +16,7 @@ class UserRepositories:
             await conn.execute(statement=stmt)
             await conn.commit()
         except Exception as e:
-            await conn.rollback()
-            raise InternalServerError()
+            raise InternalServerError(message=str(e))
 
     async def get_user(self, email: str, conn: AsyncConnection):
         stmt = select(user).where(eq(user.c.email, email))
@@ -27,5 +25,4 @@ class UserRepositories:
             result = await conn.execute(statement=stmt)
             return result.fetchone()
         except Exception as e:
-            await conn.rollback()
-            raise InternalServerError()
+            raise InternalServerError(message=str(e))
