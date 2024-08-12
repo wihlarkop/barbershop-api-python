@@ -1,6 +1,6 @@
 alembic==1.13.2
 email-validator==2.1.2
-fastapi==0.111.0
+fastapi==0.112.0
 psycopg==3.2.1
 pydantic==2.8.2
 pydantic-settings==2.3.4
@@ -8,3 +8,4 @@ pyjwt==2.8.0
 sqlalchemy==2.0.31
 uvicorn==0.30.1
 passlib==1.7.4
+orjson==3.10.6

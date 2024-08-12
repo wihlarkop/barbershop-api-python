@@ -1,7 +1,6 @@
-from typing import Callable
+from typing import Callable, Any, Coroutine
 
-from fastapi import Request
-from starlette.responses import JSONResponse
+from starlette.requests import Request
 
 from app.helper.response import JsonResponse
 
@@ -14,8 +13,8 @@ class InternalServerError(Exception):
 
 def create_exception_handler(
         status_code: int, message: str
-) -> Callable[[Request, Exception], JsonResponse]:
-    async def exception_handler(_: Request, exc: Exception) -> JSONResponse:
+) -> Callable[[Request, Exception], Coroutine[Any, Any, JsonResponse]]:
+    async def exception_handler(_: Request, exc: Exception) -> JsonResponse:
         error_message = message
         if exc is not None and hasattr(exc, 'message') and exc.message:
             error_message = exc.message

@@ -1,9 +1,8 @@
-from fastapi import APIRouter, Request, HTTPException
+from fastapi import APIRouter, Request
 from sqlalchemy import select
 
 from app.config import settings
-from app.dependency.database import DBConnection
-from app.dependency.exception import InternalServerError
+from app.dependencies.database import DBConnection
 from app.helper.response import JsonResponse
 
 health_router = APIRouter(tags=["Health"])

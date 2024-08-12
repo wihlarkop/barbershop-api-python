@@ -12,12 +12,5 @@ class ProductServices:
         results: list[GetProducts] = []
         products = await self.__product_repo.get_products(conn=conn)
         for product in products:
-            results.append(
-                GetProducts(
-                    id=product.id,
-                    name=product.name,
-                    description=product.description,
-                    image=product.image,
-                )
-            )
+            results.append(GetProducts.model_validate(product))
         return results

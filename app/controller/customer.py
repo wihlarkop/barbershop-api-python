@@ -1,6 +1,6 @@
 from fastapi import APIRouter, Request, status
 
-from app.dependency.database import DBConnection
+from app.dependencies.database import DBConnection
 from app.helper.response import JsonResponse
 from app.schemas.customer import LoginCustomer, RegisterCustomer
 from app.services.customer import CustomerServices

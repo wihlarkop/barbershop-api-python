@@ -1,9 +1,6 @@
-from typing import Annotated
+from fastapi import APIRouter, Request, status
 
-from fastapi import APIRouter, Request, status, Path
-from fastapi.encoders import jsonable_encoder
-
-from app.dependency.database import DBConnection
+from app.dependencies.database import DBConnection
 from app.helper.response import JsonResponse
 from app.services.product import ProductServices
 
@@ -15,7 +12,7 @@ async def get_all_products(request: Request, conn: DBConnection):
     product_services: ProductServices = request.state.product_services
     products = await product_services.get_all_products(conn=conn)
     return JsonResponse(
-        data=jsonable_encoder(products),
+        data=products,
         message="success get products",
         status_code=status.HTTP_200_OK
     )

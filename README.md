@@ -1,5 +1,8 @@
 # Barbershop API with Python
 
+This project inspired by captain [barbershop membership apps](https://play.google.com/store/apps/details?id=com.membership.captain)
+
+
 ## Modules
 
 ### User/Customer

@@ -9,7 +9,7 @@ from app.config import settings
 from app.controller.customer import customer_router
 from app.controller.health import health_router
 from app.controller.product import product_router
-from app.dependency.exception import create_exception_handler, InternalServerError
+from app.dependencies.exception import create_exception_handler, InternalServerError
 from app.database.client import engine
 from app.repositories.product import ProductRepositories
 from app.repositories.user import UserRepositories

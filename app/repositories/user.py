@@ -2,7 +2,7 @@ from sqlalchemy import insert, select
 from sqlalchemy.ext.asyncio import AsyncConnection
 from sqlalchemy.sql.operators import eq
 
-from app.dependency.exception import InternalServerError
+from app.dependencies.exception import InternalServerError
 from app.models.user import user
 from app.schemas.user import UserSchema
 

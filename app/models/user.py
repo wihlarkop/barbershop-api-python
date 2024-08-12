@@ -1,9 +1,17 @@
 from datetime import datetime
+from enum import StrEnum
 
-from sqlalchemy import Boolean, Date, String, Table, Column, Text, TIMESTAMP, UUID
+from sqlalchemy import Boolean, Date, String, Table, Column, Text, TIMESTAMP, UUID, Enum
 
 from app.database.client import metadata
 from app.helper.generator import timezone
+
+
+class UserRole(StrEnum):
+    capster = "capster"
+    administrator = "administrator"
+    customer = "customer"
+
 
 user = Table(
     "user",
@@ -14,8 +22,9 @@ user = Table(
     Column(name="avatar", type_=Text(), nullable=True),
     Column(name="full_name", type_=String(255), nullable=True),
     Column(name="dob", type_=Date(), nullable=True),
-    Column(name="is_member", type_=Boolean(), default=False),
-    Column(name="is_staff", type_=Boolean(), default=False),
+    Column(name="phone_number", type_=String(length=15), nullable=False),
+    Column(name="is_verified_customer", type_=Boolean(), default=False),
+    Column(name="user_role", type_=Enum(UserRole), default=UserRole.customer),
     Column(name="created_at", type_=TIMESTAMP(timezone=True), default=datetime.now(tz=timezone)),
     Column(name="updated_at", type_=TIMESTAMP(timezone=True), onupdate=datetime.now(tz=timezone)),
     Column(name="verification_at", type_=TIMESTAMP(timezone=True), nullable=True),
