@@ -17,3 +17,8 @@ dependencies = [
     "passlib>=1.7.4",
     "orjson>=3.10.7",
 ]
+
+[tool.uv]
+dev-dependencies = [
+    "fastapi-cli>=0.0.5",
+]

@@ -5,12 +5,12 @@ from sqlalchemy.sql.operators import eq
 from app.exceptions.base_exception import InternalServerError
 from app.models.user import user
 from app.repositories.interface import UserInterface
-from app.entities.user import UserSchema
+from app.entities.user import UserEntities
 
 
 class UserRepositories(UserInterface):
 
-    async def create_user(self, payload: UserSchema, conn: AsyncConnection) -> None:
+    async def create_user(self, payload: UserEntities, conn: AsyncConnection) -> None:
         stmt = insert(user).values(**payload.model_dump(exclude_unset=True))
 
         try:

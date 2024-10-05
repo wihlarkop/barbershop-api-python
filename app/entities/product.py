@@ -1,7 +1,7 @@
 from app.entities.base import AuditBaseModel
 
 
-class ProductSchema(AuditBaseModel):
+class ProductEntities(AuditBaseModel):
     uuid: int
     name: str
     description: str

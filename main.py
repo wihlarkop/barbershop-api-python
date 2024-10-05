@@ -11,6 +11,8 @@ from app.controller.health import health_router
 from app.controller.product import product_router
 from app.exceptions.base_exception import create_exception_handler, InternalServerError
 from app.database.client import engine
+from app.exceptions.token_exception import TokenExpired, TokenInvalid
+from app.exceptions.user_exception import UserAlreadyExists
 from app.repositories.product import ProductRepositories
 from app.repositories.user import UserRepositories, UserInterface
 from app.services.customer import CustomerServices
@@ -43,6 +45,19 @@ app.add_exception_handler(
     exc_class_or_status_code=InternalServerError,
     handler=create_exception_handler(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, message="something went wrong")
 )
+app.add_exception_handler(
+    exc_class_or_status_code=UserAlreadyExists,
+    handler=create_exception_handler(status_code=status.HTTP_409_CONFLICT)
+)
+app.add_exception_handler(
+    exc_class_or_status_code=TokenExpired,
+    handler=create_exception_handler(status_code=status.HTTP_401_UNAUTHORIZED, message="Refresh token expired, login required.")
+)
+app.add_exception_handler(
+    exc_class_or_status_code=TokenInvalid,
+    handler=create_exception_handler(status_code=status.HTTP_403_FORBIDDEN, message="Invalid refresh token.")
+)
+
 
 app.include_router(health_router)
 app.include_router(customer_router)

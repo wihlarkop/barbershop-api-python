@@ -12,7 +12,8 @@ class InternalServerError(Exception):
 
 
 def create_exception_handler(
-        status_code: int, message: str
+        status_code: int,
+        message: str | None  = None
 ) -> Callable[[Request, Exception], Coroutine[Any, Any, JsonResponse]]:
     async def exception_handler(_: Request, exc: Exception) -> JsonResponse:
         error_message = message
