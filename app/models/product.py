@@ -1,6 +1,6 @@
 from datetime import datetime
 
-from sqlalchemy import String, Table, Column, TIMESTAMP, Text, Integer
+from sqlalchemy import String, Table, Column, TIMESTAMP, Text, UUID
 
 from app.database.client import metadata
 from app.helper.generator import timezone
@@ -8,7 +8,7 @@ from app.helper.generator import timezone
 product = Table(
     "product",
     metadata,
-    Column(name="id", type_=Integer(), autoincrement=True, primary_key=True),
+    Column(name="uuid", type_=UUID(), autoincrement=True, primary_key=True),
     Column(name="name", type_=String(), nullable=False),
     Column(name="description", type_=String(), nullable=False),
     Column(name="image", type_=Text(), nullable=False),

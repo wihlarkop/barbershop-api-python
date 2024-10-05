@@ -1,7 +1,7 @@
 from datetime import date
 from uuid import UUID
 
-from app.schemas.base import AuditBaseModel
+from app.entities.base import AuditBaseModel
 
 
 class UserSchema(AuditBaseModel):

@@ -1,15 +1,15 @@
 from typing import NoReturn
 
 from fastapi import HTTPException, status
-from sqlalchemy.ext.asyncio import AsyncEngine, AsyncConnection
+from sqlalchemy.ext.asyncio import AsyncConnection
 
 from app.helper.generator import hash_password, verify_password
-from app.repositories.user import UserRepositories
+from app.repositories.user import UserInterface
 from app.schemas.customer import LoginCustomer, RegisterCustomer
 
 
 class CustomerServices:
-    def __init__(self, user_repo: UserRepositories):
+    def __init__(self, user_repo: UserInterface):
         self.__user_repo = user_repo
 
     async def register(self, payload: RegisterCustomer, conn: AsyncConnection) -> NoReturn:

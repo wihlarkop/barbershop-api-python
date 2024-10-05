@@ -1,7 +1,7 @@
 from pydantic import BaseModel, SecretStr, EmailStr
 
 from app.helper.generator import generate_uuid
-from app.schemas.user import UserSchema
+from app.entities.user import UserSchema
 
 
 class RegisterCustomer(BaseModel):

@@ -1,0 +1,19 @@
+[project]
+name = "barbershop-api-python"
+version = "0.1.0"
+description = "this project for membership app barbershop"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "alembic>=1.13.3",
+    "email-validator>=2.2.0",
+    "fastapi>=0.115.0",
+    "psycopg>=3.2.3",
+    "pydantic>=2.9.2",
+    "pydantic-settings>=2.5.2",
+    "pyjwt>=2.9.0",
+    "sqlalchemy>=2.0.35",
+    "uvicorn>=0.31.0",
+    "passlib>=1.7.4",
+    "orjson>=3.10.7",
+]

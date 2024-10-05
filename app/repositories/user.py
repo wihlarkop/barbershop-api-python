@@ -2,14 +2,15 @@ from sqlalchemy import insert, select
 from sqlalchemy.ext.asyncio import AsyncConnection
 from sqlalchemy.sql.operators import eq
 
-from app.dependencies.exception import InternalServerError
+from app.exceptions.base_exception import InternalServerError
 from app.models.user import user
-from app.schemas.user import UserSchema
+from app.repositories.interface import UserInterface
+from app.entities.user import UserSchema
 
 
-class UserRepositories:
+class UserRepositories(UserInterface):
 
-    async def create_user(self, payload: UserSchema, conn: AsyncConnection):
+    async def create_user(self, payload: UserSchema, conn: AsyncConnection) -> None:
         stmt = insert(user).values(**payload.model_dump(exclude_unset=True))
 
         try:
