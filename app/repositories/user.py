@@ -19,7 +19,7 @@ class UserRepositories(UserInterface):
         except Exception as e:
             raise InternalServerError(message=str(e))
 
-    async def get_user(self, email: str, conn: AsyncConnection):
+    async def get_user_by_email(self, email: str, conn: AsyncConnection):
         stmt = select(user).where(eq(user.c.email, email))
 
         try:
