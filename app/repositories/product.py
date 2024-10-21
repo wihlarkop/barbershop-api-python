@@ -1,4 +1,6 @@
-from sqlalchemy import select
+from typing import Sequence
+
+from sqlalchemy import select, RowMapping
 from sqlalchemy.ext.asyncio import AsyncConnection
 
 from app.exceptions.base_exception import InternalServerError
@@ -7,8 +9,8 @@ from app.repositories.interface import ProductInterface
 
 
 class ProductRepositories(ProductInterface):
-    async def get_products(self, conn: AsyncConnection):
-        stmt = select(product.c.id, product.c.name, product.c.description, product.c.image)
+    async def get_products(self, conn: AsyncConnection) -> Sequence[RowMapping]:
+        stmt = select(product.c.uuid, product.c.name, product.c.description, product.c.image)
 
         try:
             result = await conn.execute(statement=stmt)

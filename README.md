@@ -7,9 +7,8 @@ This project inspired by captain [barbershop membership apps](https://play.googl
 
 ### User/Customer
 - **User**
-  - [ ] Detail user
-  - [ ] Update user
-  - [ ] Change password user
+  - [ ] Detail user 
+  - [ ] Update user profile
   - [ ] Delete user
   - [ ] Activate membership
   - [x] Register

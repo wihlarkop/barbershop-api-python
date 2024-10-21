@@ -15,7 +15,7 @@ def generate_jwt(email: str) -> str:
     return token
 
 
-def generate_refresh_token(email) -> str:
+def generate_refresh_token(email: str) -> str:
     payload = {
         "email": email,
         "exp": datetime.now() + timedelta(days=7)

@@ -9,8 +9,6 @@ class ProductServices:
         self.__product_repo = product_repo
 
     async def get_all_products(self, conn: AsyncConnection) -> list[GetProducts]:
-        results: list[GetProducts] = []
         products = await self.__product_repo.get_products(conn=conn)
-        for product in products:
-            results.append(GetProducts.model_validate(product))
+        results: list[GetProducts] = [GetProducts.model_validate(product) for product in products]
         return results

@@ -1,9 +1,12 @@
 import os
 import signal
+from cgitb import handler
 from contextlib import asynccontextmanager
 
 import uvicorn
 from fastapi import FastAPI, status
+from fastapi.exceptions import RequestValidationError, ResponseValidationError
+from fastapi.responses import ORJSONResponse
 
 from app.config import settings
 from app.controller.customer import customer_router
@@ -38,9 +41,14 @@ app = FastAPI(
     title=settings.APP_NAME,
     version=settings.APP_VERSION,
     lifespan=lifespan,
+    default_response_class=ORJSONResponse
 )
 
 # for add new custom exception handler
+app.add_exception_handler(
+    exc_class_or_status_code=ResponseValidationError,
+    handler=create_exception_handler(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR)
+)
 app.add_exception_handler(
     exc_class_or_status_code=InternalServerError,
     handler=create_exception_handler(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, message="something went wrong")
@@ -51,17 +59,17 @@ app.add_exception_handler(
 )
 app.add_exception_handler(
     exc_class_or_status_code=TokenExpired,
-    handler=create_exception_handler(status_code=status.HTTP_401_UNAUTHORIZED, message="Refresh token expired, login required.")
+    handler=create_exception_handler(status_code=status.HTTP_401_UNAUTHORIZED,
+                                     message="Refresh token expired, login required.")
 )
 app.add_exception_handler(
     exc_class_or_status_code=TokenInvalid,
     handler=create_exception_handler(status_code=status.HTTP_403_FORBIDDEN, message="Invalid refresh token.")
 )
 
-
 app.include_router(health_router)
-app.include_router(customer_router)
-app.include_router(product_router)
+app.include_router(customer_router, prefix="/api/v1/customer")
+app.include_router(product_router, prefix="/api/v1/product")
 
 if __name__ == "__main__":
     try:
