@@ -1,10 +1,4 @@
-from typing import Any, Generic, TypeVar
-
 from fastapi import APIRouter, Request, status
-from fastapi.encoders import jsonable_encoder
-from fastapi.responses import ORJSONResponse
-from orjson import orjson
-from pydantic import BaseModel
 
 from app.dependencies.database import DBConnection
 from app.helper.response import JsonResponse

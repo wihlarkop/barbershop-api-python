@@ -1,6 +1,6 @@
 from datetime import datetime
 
-from sqlalchemy import String, Table, Column, TIMESTAMP, Text, UUID
+from sqlalchemy import Float, String, Table, Column, TIMESTAMP, Text, UUID
 
 from app.database.client import metadata
 from app.helper.generator import timezone
@@ -12,6 +12,7 @@ product = Table(
     Column(name="name", type_=String(), nullable=False),
     Column(name="description", type_=String(), nullable=False),
     Column(name="image", type_=Text(), nullable=False),
+    Column(name='price', type_=Float(), nullable=False),
     Column(name="created_at", type_=TIMESTAMP(timezone=True), default=datetime.now(tz=timezone)),
     Column(name="updated_at", type_=TIMESTAMP(timezone=True), onupdate=datetime.now(tz=timezone)),
     Column(name="deleted_at", type_=TIMESTAMP(timezone=True), nullable=True),

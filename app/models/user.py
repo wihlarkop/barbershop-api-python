@@ -7,7 +7,7 @@ from app.database.client import metadata
 from app.helper.generator import timezone
 
 
-class UserRole(StrEnum):
+class UserRoleEnum(StrEnum):
     capster = "capster"
     administrator = "administrator"
     customer = "customer"
@@ -24,7 +24,7 @@ user = Table(
     Column(name="dob", type_=Date(), nullable=True),
     Column(name="phone_number", type_=String(length=15), nullable=False),
     Column(name="is_verified_customer", type_=Boolean(), default=False),
-    Column(name="user_role", type_=Enum(UserRole), default=UserRole.customer),
+    Column(name="user_role_enum", type_=Enum(UserRoleEnum), default=UserRoleEnum.customer),
     Column(name="created_at", type_=TIMESTAMP(timezone=True), default=datetime.now(tz=timezone)),
     Column(name="updated_at", type_=TIMESTAMP(timezone=True), onupdate=datetime.now(tz=timezone)),
     Column(name="verification_at", type_=TIMESTAMP(timezone=True), nullable=True),

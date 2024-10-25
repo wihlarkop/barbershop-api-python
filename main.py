@@ -1,23 +1,24 @@
 import os
 import signal
-from cgitb import handler
 from contextlib import asynccontextmanager
 
 import uvicorn
 from fastapi import FastAPI, status
-from fastapi.exceptions import RequestValidationError, ResponseValidationError
+from fastapi.exceptions import ResponseValidationError
 from fastapi.responses import ORJSONResponse
 
 from app.config import settings
 from app.controller.customer import customer_router
 from app.controller.health import health_router
 from app.controller.product import product_router
+from app.controller.store import store_router
+from app.controller.transaction import transaction_router
 from app.exceptions.base_exception import create_exception_handler, InternalServerError
 from app.database.client import engine
 from app.exceptions.token_exception import TokenExpired, TokenInvalid
 from app.exceptions.user_exception import UserAlreadyExists
 from app.repositories.product import ProductRepositories
-from app.repositories.user import UserRepositories, UserInterface
+from app.repositories.user import UserRepositories
 from app.services.customer import CustomerServices
 from app.services.product import ProductServices
 
@@ -70,6 +71,8 @@ app.add_exception_handler(
 app.include_router(health_router)
 app.include_router(customer_router, prefix="/api/v1/customer")
 app.include_router(product_router, prefix="/api/v1/product")
+app.include_router(store_router, prefix="/api/v1/store")
+app.include_router(transaction_router, prefix="/api/v1/transaction")
 
 if __name__ == "__main__":
     try:
