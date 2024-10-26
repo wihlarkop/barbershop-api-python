@@ -5,8 +5,8 @@ from sqlalchemy import Table, Column, UUID, ForeignKeyConstraint, TIMESTAMP, Str
 from app.database.client import metadata
 from app.helper.generator import timezone
 
-store_capster = Table(
-    "store_capster",
+capster = Table(
+    "capster",
     metadata,
     Column(name="uuid", type_=UUID(), primary_key=True),
     Column(name="user_uuid", type_=UUID()),

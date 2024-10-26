@@ -19,5 +19,18 @@ class StoreServices:
         store = await self.__store_repo.get_store_by_uuid(conn=conn, store_uuid=store_uuid)
         if not store:
             return None
-        result: GetStore = GetStore.model_validate(store)
+
+        capsters = store.get("capsters")
+        if isinstance(capsters, str) and capsters == "[]":
+            capsters = []
+
+        result: GetStore = GetStore(
+            uuid=store.get("uuid"),
+            store_name=store.get("store_name"),
+            address=store.get("address"),
+            phone_number=store.get("phone_number"),
+            opening_hours=store.get("opening_hours"),
+            closing_hours=store.get("closing_hours"),
+            capsters=capsters,
+        )
         return result

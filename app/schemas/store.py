@@ -4,6 +4,10 @@ from uuid import UUID
 from pydantic import BaseModel
 
 
+class GetStoreCapster(BaseModel):
+    user_uuid: UUID | None = None
+    full_name: str | None = None
+
 class GetStores(BaseModel):
     uuid: UUID
     store_name: str
@@ -19,3 +23,4 @@ class GetStore(BaseModel):
     phone_number: str
     opening_hours: time
     closing_hours: time
+    capsters: list[GetStoreCapster] | list = []
