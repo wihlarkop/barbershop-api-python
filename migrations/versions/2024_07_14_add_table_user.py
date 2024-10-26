@@ -39,7 +39,6 @@ def upgrade() -> None:
         ),
         sa.Column(name="created_at", type_=sa.TIMESTAMP(timezone=True), default=datetime.now(tz=timezone)),
         sa.Column(name="updated_at", type_=sa.TIMESTAMP(timezone=True), onupdate=datetime.now(tz=timezone)),
-        sa.Column(name="verification_at", type_=sa.TIMESTAMP(timezone=True), nullable=True),
         sa.Column(name="deleted_at", type_=sa.TIMESTAMP(timezone=True), nullable=True),
         sa.Column(name="created_by", type_=sa.String(length=255)),
         sa.Column(name="updated_by", type_=sa.String(length=255)),

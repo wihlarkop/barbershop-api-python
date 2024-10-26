@@ -10,7 +10,6 @@ from typing import Sequence, Union
 
 import sqlalchemy as sa
 from alembic import op
-from sqlalchemy.dialects.postgresql import TSTZRANGE
 
 from app.helper.generator import timezone
 
@@ -29,7 +28,8 @@ def upgrade() -> None:
         sa.Column(name="address", type_=sa.Text(), nullable=False),
         sa.Column(name="phone_number", type_=sa.String(length=15), nullable=False),
         sa.Column(name="store_qr", type_=sa.Text(), nullable=True),
-        sa.Column(name="opening_hours", type_=TSTZRANGE, nullable=False),
+        sa.Column(name="opening_hours", type_=sa.Time(), nullable=False),
+        sa.Column(name="closing_hours", type_=sa.Time(), nullable=False),
         sa.Column(name="created_at", type_=sa.TIMESTAMP(timezone=True), default=datetime.now(tz=timezone)),
         sa.Column(name="updated_at", type_=sa.TIMESTAMP(timezone=True), onupdate=datetime.now(tz=timezone)),
         sa.Column(name="deleted_at", type_=sa.TIMESTAMP(timezone=True), nullable=True),
