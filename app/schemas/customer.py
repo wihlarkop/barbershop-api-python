@@ -1,7 +1,7 @@
-from pydantic import BaseModel, SecretStr, EmailStr
+from pydantic import BaseModel, EmailStr, SecretStr
 
-from app.helper.generator import generate_uuid
 from app.entities.user import UserEntities
+from app.helper.generator import generate_uuid
 
 
 class RegisterCustomerRequest(BaseModel):
@@ -11,7 +11,7 @@ class RegisterCustomerRequest(BaseModel):
     def transform(self, hash_password: str) -> UserEntities:
         return UserEntities(
             uuid=generate_uuid(),
-            email=self.email,
+            email=str(self.email),
             password=hash_password
         )
 

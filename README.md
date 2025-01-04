@@ -13,6 +13,7 @@ This project inspired by [captain barbershop membership apps](https://play.googl
   - [ ] Activate membership
   - [x] Register
   - [ ] Login
+  - [ ] Checkin on store
 - **Transaction**
   - [ ] List transaction
   - [ ] Detail transaction
