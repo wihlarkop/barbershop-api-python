@@ -3,8 +3,7 @@ import signal
 from contextlib import asynccontextmanager
 
 import uvicorn
-from fastapi import FastAPI, HTTPException, status
-from fastapi.exceptions import ResponseValidationError
+from fastapi import FastAPI
 from fastapi.responses import ORJSONResponse
 
 from app.config import settings
@@ -14,7 +13,7 @@ from app.controller.product import product_router
 from app.controller.store import store_router
 from app.controller.transaction import transaction_router
 from app.database.client import engine
-from app.exceptions.base import InternalServerError, create_exception_handler, exception_handlers
+from app.exceptions.base import exception_handlers
 from app.repositories.product import ProductRepositories
 from app.repositories.store import StoreRepositories
 from app.repositories.user import UserRepositories

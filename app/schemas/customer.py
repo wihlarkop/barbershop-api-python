@@ -1,4 +1,4 @@
-from pydantic import BaseModel, EmailStr, SecretStr
+from pydantic import BaseModel, EmailStr
 
 from app.entities.user import UserEntities
 from app.helper.generator import generate_uuid

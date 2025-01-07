@@ -4,7 +4,7 @@ from uuid import UUID
 from sqlalchemy import RowMapping, and_, cast, func, select
 from sqlalchemy.dialects.postgresql import JSONB
 from sqlalchemy.ext.asyncio import AsyncConnection
-from sqlalchemy.sql.operators import eq, exists
+from sqlalchemy.sql.operators import eq
 
 from app.exceptions.base import InternalServerError
 from app.models.capster import capster
