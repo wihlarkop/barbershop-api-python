@@ -7,7 +7,7 @@ from app.helper.response import JsonResponse
 from app.schemas.store import GetStore, GetStores
 from app.services.store import StoreServices
 
-store_router = APIRouter(tags=["Store"])
+store_router = APIRouter(tags=["Store"], prefix="/api/v1/store")
 
 
 @store_router.get(path="", response_model=JsonResponse[list[GetStores]])

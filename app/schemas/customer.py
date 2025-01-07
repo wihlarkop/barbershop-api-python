@@ -6,7 +6,7 @@ from app.helper.generator import generate_uuid
 
 class RegisterCustomerRequest(BaseModel):
     email: EmailStr
-    password: SecretStr
+    password: str
 
     def transform(self, hash_password: str) -> UserEntities:
         return UserEntities(
@@ -18,7 +18,7 @@ class RegisterCustomerRequest(BaseModel):
 
 class LoginCustomerRequest(BaseModel):
     email: EmailStr
-    password: SecretStr
+    password: str
 
 
 class LoginCustomerResponse(BaseModel):

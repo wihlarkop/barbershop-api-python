@@ -7,7 +7,7 @@ from app.helper.response import JsonResponse
 from app.schemas.product import GetProducts
 from app.services.product import ProductServices
 
-product_router = APIRouter(tags=["Product"])
+product_router = APIRouter(tags=["Product"], prefix="/api/v1/product")
 
 
 @product_router.get(path="", response_model=JsonResponse[list[GetProducts]])

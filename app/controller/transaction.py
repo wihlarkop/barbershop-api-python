@@ -2,7 +2,7 @@ from fastapi import APIRouter, Request
 
 from app.dependencies.database import DBConnection
 
-transaction_router = APIRouter(tags=["Transaction"])
+transaction_router = APIRouter(tags=["Transaction"], prefix="/api/v1/transaction")
 
 
 @transaction_router.get(

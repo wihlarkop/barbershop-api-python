@@ -5,7 +5,7 @@ from sqlalchemy import RowMapping, select
 from sqlalchemy.ext.asyncio import AsyncConnection
 from sqlalchemy.sql.operators import eq
 
-from app.exceptions.base_exception import InternalServerError
+from app.exceptions.base import InternalServerError
 from app.models.product import product
 from app.repositories.interface import ProductInterface
 

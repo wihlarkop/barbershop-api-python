@@ -12,12 +12,13 @@ class UserRoleEnum(StrEnum):
 
 
 class UserEntities(AuditBaseModel):
-	uuid: UUID
-	email: str
-	password: str
+	uuid: UUID | None = None
+	email: str | None = None
+	password: str | None = None
 	avatar: str | None = None
 	full_name: str | None = None
 	dob: date | None = None
 	phone_number: str | None = None
 	is_verified_customer: bool = False
+	store_code: str | None = None
 	user_role: UserRoleEnum = UserRoleEnum.customer

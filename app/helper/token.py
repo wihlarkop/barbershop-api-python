@@ -3,7 +3,7 @@ from datetime import datetime, timedelta
 import jwt
 
 from app.config import settings
-from app.exceptions.token_exception import TokenExpired, TokenInvalid
+from app.exceptions.token import TokenExpired, TokenInvalid
 
 
 def generate_jwt(email: str) -> str:
